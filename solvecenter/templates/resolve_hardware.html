@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Hardware{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column justify-content-center align-items-center container-fluid mt-4">
+        <h1>Hardware</h1>
+        <div class="dropdown">
+            <button type="button" autofocus class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Select Hardware to troubleshoot</button>
+            <ul class="dropdown-menu">
+                {% for hardware in hardware_devices %}
+                    <li><a class="dropdown-item" href="{% url 'hardware_issues' hardware.id %}">{{hardware.hardware_device}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
