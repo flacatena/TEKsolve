@@ -2,5 +2,44 @@
 {% block title %}TekSolve{% endblock %}
 
 {% block content %}
-<h1>{{resolution_steps.issue.reported_resolution}}</h1>
+    {% if resolution_steps.reported_resolution %}
+        <div class="d-flex justify-content-center">
+            <div class="card w-75 card text-center">
+                <div class="card-header">
+                    <h5 class="card-title">{{resolution_steps.issue.software}} <br>Reported on: {{resolution_steps.date_reported}}
+                    <br>Reported issue: {{resolution_steps.issue}}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <h3>{{resolution_steps.reported_resolution}}</h3>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'show_hardware_issues' resolution_steps.issue.hardware.id %}" class="btn btn-primary">Back to other {{resolution_steps.issue.software}} reported issues.</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            var myModal = new bootstrap.Modal(document.getElementById('myDjangoModal'));
+            myModal.show();});
+        </script>
+
+        <div class="modal fade" style="display: block;" data-bs-backdrop='static' data-bs-keyboard='false' id="myDjangoModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-align: centerwhy ">The issue below currently does not have a resolution.</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-break">{{resolution_steps}}</p>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center ">
+                        <a  class="btn btn-primary" href="{% url 'show_software_issues' software_id %}">Back to other {{resolution_steps.software}} reported issues.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

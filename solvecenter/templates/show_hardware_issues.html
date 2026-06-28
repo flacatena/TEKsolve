@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{hardware_devices.hardware_device}}{% endblock %}
+
+{% block content %}
+    <h3 style="text-align: center;">Reported issues for: <span style="text-decoration: underline;">{{hardware_devices.hardware_device}}</span></h3>
+    {% if hardware_devices %}
+        {% for issues in issues_list %}
+            <div class="d-flex mt-3">
+                <div class="list-group">
+                    <a href="{% url 'show_hardware_resolution' issues.id %}" style="background-color: lightgrey" onmouseover="this.style.background='lightblue';" onmouseout="this.style.background='lightgray';"  class="list-group-item list-group-item-action">
+                        <small>(Reported: {{issues.date_reported}})</small><br>{{issues.reported_issue}}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+            <h1 style="text-align: center;">No reported issues.</h1>"
+    {% endif %}
+{% endblock %}    
+

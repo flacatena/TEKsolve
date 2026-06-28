@@ -35,7 +35,7 @@ class Issue(models.Model):
     
 class Resolution(models.Model):
     issue = models.ForeignKey(Issue,on_delete=models.CASCADE, related_name='resolutions')
-    reported_resolution = models.TextField()
+    reported_resolution = models.TextField(null=True, blank=True)
     date_reported = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
