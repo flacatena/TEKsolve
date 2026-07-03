@@ -2,7 +2,10 @@
 {% block title %}{{hardware_devices.hardware_device}}{% endblock %}
 
 {% block content %}
-    <h3 style="text-align: center;">Reported issues for: <span style="text-decoration: underline;">{{hardware_devices.hardware_device}}</span></h3>
+    <h3 style="text-align: center;">Reported issues for: {{hardware_devices.hardware_device}}</h3>
+    <div style="text-align: center;">
+        <a href="{% url 'hardware_list'%}">Select different hardware</a>
+    </div>
     {% if hardware_devices %}
         {% for issues in issues_list %}
             <div class="d-flex mt-3">

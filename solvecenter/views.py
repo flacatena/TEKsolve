@@ -26,26 +26,42 @@ def software_issues(request,id):
         raise Http404("No Software found!")
     return render(request,'show_software_issues.html',{'software_products': software_products, 'issues_list': issues_list})
 
-def show_hardware_resolution(request,id):
-    try:
-        resolution_steps = Resolution.objects.get(id=id)
-        return render(request, 'show_hardware_resolution.html',{'resolution_steps': resolution_steps})
 
-    except Resolution.DoesNotExist:
-        resolution_steps =  Issue.objects.get(id=id)
-        hardware_id = resolution_steps.hardware_id
-        return render(request, 'show_hardware_resolution.html',{'resolution_steps': resolution_steps, 'hardware_id': hardware_id})
+
+
+
+def show_hardware_resolution(request,id): #receiving the issue with this id
+    try:
+        issue_selected = Issue.objects.get(id=id)
+        resolution_to_issue = issue_selected.resolutions.reported_resolution
+        hardware_selected = issue_selected.hardware_id
+        return render(request,  'show_hardware_resolution.html',{'issue_selected': issue_selected, 'resolution_to_issue': resolution_to_issue, 'hardware_selected':hardware_selected})
+    
+    except Resolution.DoesNotExist: # except Issue.DoesNotExist:
+        issue_selected =  Issue.objects.get(id=id)
+        hardware_selected = issue_selected.hardware_id
+        return render(request, 'show_hardware_resolution.html',{'issue_selected': issue_selected, 'hardware_selected': hardware_selected})
+    
+
+
+
+
+
+
+
 
 
 def show_software_resolution(request,id):
     try:
-        resolution_steps = Resolution.objects.get(id=id)
-        return render(request, 'show_software_resolution.hmtl',{'resolution_steps': resolution_steps})
+        issue_selected = Issue.objects.get(id=id)
+        resolution_to_issue = issue_selected.resolutions.reported_resolution
+        software_selected = issue_selected.software_id
+        return render(request, 'show_software_resolution.html',{'issue_selected': issue_selected, 'resolution_to_issue' : resolution_to_issue, 'software_selected':software_selected})
     
     except Resolution.DoesNotExist:
-        resolution_steps = Issue.objects.get(id=id)
-        software_id = resolution_steps.software_id
-        return render(request, 'show_software_resolution.html',{'resolution_steps': resolution_steps, 'software_id': software_id})
+        issue_selected = Issue.objects.get(id=id)
+        software_selected = issue_selected.software_id
+        return render(request, 'show_software_resolution.html',{'resolution_steps': issue_selected, 'software_selected': software_selected})
 
 
 # Create your views here.python

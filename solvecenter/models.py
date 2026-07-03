@@ -29,14 +29,16 @@ class Issue(models.Model):
     software = models.ForeignKey(Software, null=True, blank=True, on_delete=models.CASCADE)
     reported_issue = models.TextField()
     date_reported = models.DateTimeField(auto_now_add=True)
+    issue_pic = models.ImageField(upload_to='issue_pics/', blank=True)
 
     def __str__(self):
         return self.reported_issue
     
 class Resolution(models.Model):
-    issue = models.ForeignKey(Issue,on_delete=models.CASCADE, related_name='resolutions')
+    issue = models.OneToOneField(Issue,on_delete=models.CASCADE, primary_key=True ,related_name='resolutions')
     reported_resolution = models.TextField(null=True, blank=True)
     date_reported = models.DateTimeField(auto_now_add=True)
+    resolution_pic = models.ImageField(upload_to='resolution_pics/', blank=True)
 
     def __str__(self):
         return self.reported_resolution

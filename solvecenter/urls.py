@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -11,3 +13,5 @@ urlpatterns = [
     path('show_hardware_resolution/<int:id>',views.show_hardware_resolution,name='show_hardware_resolution'),
     path('show_software_resolution/<int:id>',views.show_software_resolution, name='show_software_resolution'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,4 +1,4 @@
-#!/home/programmer/TekSolve/tekEnv/bin/python3
+#!/home/programmer/TekSolve/tekEnv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

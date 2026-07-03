@@ -3,19 +3,21 @@
 
 {% block content %}
 
-    {% if resolution_steps.reported_resolution %}
+    {% if resolution_to_issue %}
         <div class="d-flex justify-content-center">
             <div class="card w-75 card text-center">
                 <div class="card-header">
-                    <h5 class="card-title">{{resolution_steps.issue.hardware}} <br>Reported on: {{resolution_steps.date_reported}}
-                        <br>Reported issue: {{resolution_steps.issue}}
+                    <h5 class="card-title">{{issue_selected.hardware}} <br>Reported on: {{issue_selected.date_reported}}
+                        <br>Reported issue: {{issue_selected.reported_issue}}
                     </h5>
                 </div>
                 <div class="card-body">
-                 <h3>{{resolution_steps.reported_resolution}}</h3>
+                    <h1>Resolution:</h1>
+                    <h3>{{resolution_to_issue}}</h3>
+                    <img src="{{issue_selected.resolution_pic.url}}"></img>
                 </div>
                 <div class="card-footer">
-                    <a href="{% url 'show_hardware_issues' resolution_steps.issue.hardware.id %}" class="btn btn-primary">Back to other {{resolution_steps.issue.hardware}} reported issues.</a>
+                    <a href="{% url 'show_hardware_issues' hardware_selected %}" class="btn btn-primary">Back to other {{issue_selected.hardware}} reported issues.</a>
                 </div>
             </div>
         </div>
@@ -33,10 +35,10 @@
                         <h5 class="modal-title text-align: centerwhy ">The issue below currently does not have a resolution.</h5>
                     </div>
                     <div class="modal-body">
-                        <p class="text-break">{{resolution_steps}}</p>
+                        <p class="text-break">{{issue_selected}}</p>
                     </div>
                     <div class="modal-footer d-flex justify-content-center ">
-                        <a  class="btn btn-primary" href="{% url 'show_hardware_issues' hardware_id %}">Back to other {{resolution_steps.hardware}} reported issues.</a>
+                        <a  class="btn btn-primary" href="{% url 'show_hardware_issues' hardware_selected %}">Back to other {{issue_selected.hardware}} reported issues.</a>
                     </div>
                 </div>
             </div>
