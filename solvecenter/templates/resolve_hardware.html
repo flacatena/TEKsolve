@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Hardware{% endblock %}
-
 {% block content %}
 <h1 style="text-align: center;">HARDWARE</h1>
+{% if hardware_devices %}
 <div class="d-flex justify-content-center align-items-center container-fluid mt-4">
     <div class="dropdown dropdown-center">
         <button type="button" autofocus class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Select Hardware to troubleshoot
@@ -15,4 +15,7 @@
         </button>
     </div>
 </div>
+{% else %}
+    <h1 style="text-align: center;">No Hardware registered in system:</h1>
+{% endif %}
 {% endblock %}  

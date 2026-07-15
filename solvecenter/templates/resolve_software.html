@@ -1,19 +1,21 @@
 {% extends "base.html" %}
 {% block title %}Software{% endblock %}
-
 {% block content %}
 <h1 style="text-align: center;">SOFTWARE</h1>
+{% if software_products %}
 <div class="d-flex justify-content-center align-items-center container-fluid mt-4">
-    
     <div class="dropdown dropdown-center">
         <button type="button" autofocus class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Select Software to troubleshoot
-
         </button>
             <ul class="dropdown-menu">     
                 {% for software in software_products %}           
                     <li><a class="dropdown-item text-center " href="{% url 'show_software_issues' software.id %}">{{software.software_product}}</a></li>
                 {% endfor %}
             </ul>
+        </button>
     </div>
 </div>
+{% else %}
+    <h1 style="text-align: center;">No Software registered in system.</h1>
+{% endif %}
 {% endblock %}

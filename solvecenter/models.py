@@ -1,7 +1,7 @@
 from django.db import models
 
+
 class Hardware(models.Model):
-    
     hardware_device = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
 
@@ -13,7 +13,6 @@ class Hardware(models.Model):
         return self.hardware_device
 
 class Software(models.Model):
-
     software_product = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
 
@@ -25,21 +24,21 @@ class Software(models.Model):
         return self.software_product
     
 class Issue(models.Model):
-    hardware = models.ForeignKey(Hardware, null=True, blank=True, on_delete=models.CASCADE)
-    software = models.ForeignKey(Software, null=True, blank=True, on_delete=models.CASCADE)
-    reported_issue = models.TextField()
+    hardware = models.ForeignKey(Hardware, null=True, blank=True, on_delete=models.SET_NULL)
+    software = models.ForeignKey(Software, null=True, blank=True, on_delete=models.SET_NULL)
+    issue_pic = models.ImageField(upload_to='issue_pics/', null=True, blank=True)
     date_reported = models.DateTimeField(auto_now_add=True)
-    issue_pic = models.ImageField(upload_to='issue_pics/', blank=True)
-
+    reported_issue = models.TextField()
+    
     def __str__(self):
         return self.reported_issue
     
 class Resolution(models.Model):
     issue = models.OneToOneField(Issue,on_delete=models.CASCADE, primary_key=True ,related_name='resolutions')
-    reported_resolution = models.TextField(null=True, blank=True)
+    resolution_pic = models.ImageField(upload_to='resolution_pics/', blank=True, null=True)
     date_reported = models.DateTimeField(auto_now_add=True)
-    resolution_pic = models.ImageField(upload_to='resolution_pics/', blank=True)
-
+    reported_resolution = models.TextField()
+    
     def __str__(self):
         return self.reported_resolution
 

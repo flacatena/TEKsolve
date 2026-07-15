@@ -7,14 +7,16 @@
         <div class="d-flex justify-content-center">
             <div class="card w-75 card text-center">
                 <div class="card-header">
-                    <h5 class="card-title">{{issue_selected.hardware}} <br>Reported on: {{issue_selected.date_reported}}
+                    <h5 class="card-title">Troubleshooting: {{issue_selected.hardware}} <br>Reported on: {{issue_selected.date_reported}}
                         <br>Reported issue: {{issue_selected.reported_issue}}
                     </h5>
                 </div>
                 <div class="card-body">
                     <h1>Resolution:</h1>
                     <h3>{{resolution_to_issue}}</h3>
-                    <img src="{{issue_selected.resolution_pic.url}}"></img>
+                    {% if issue_selected.resolutions.resolution_pic %}
+                    <img src="{{issue_selected.resolutions.resolution_pic.url}}"></img>
+                    {% endif %}
                 </div>
                 <div class="card-footer">
                     <a href="{% url 'show_hardware_issues' hardware_selected %}" class="btn btn-primary">Back to other {{issue_selected.hardware}} reported issues.</a>
@@ -31,8 +33,8 @@
         <div class="modal fade" style="display: block;" data-bs-backdrop='static' data-bs-keyboard='false' id="noResolutionModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-align: centerwhy ">The issue below currently does not have a resolution.</h5>
+                    <div class="modal-header" style="text-align: center">
+                        <h5 class="modal-title">The issue below currently does not have a resolution.</h5>
                     </div>
                     <div class="modal-body">
                         <p class="text-break">{{issue_selected}}</p>

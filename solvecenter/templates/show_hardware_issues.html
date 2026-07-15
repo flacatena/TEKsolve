@@ -1,23 +1,26 @@
 {% extends "base.html" %}
 {% block title %}{{hardware_devices.hardware_device}}{% endblock %}
-
 {% block content %}
     <h3 style="text-align: center;">Reported issues for: {{hardware_devices.hardware_device}}</h3>
     <div style="text-align: center;">
-        <a href="{% url 'hardware_list'%}">Select different hardware</a>
+        <a href="{% url 'hardware_list'%}" class="btn btn-primary">Select different hardware</a>
     </div>
-    {% if hardware_devices %}
-        {% for issues in issues_list %}
-            <div class="d-flex mt-3">
-                <div class="list-group">
-                    <a href="{% url 'show_hardware_resolution' issues.id %}" style="background-color: lightgrey" onmouseover="this.style.background='lightblue';" onmouseout="this.style.background='lightgray';"  class="list-group-item list-group-item-action">
-                        <small>(Reported: {{issues.date_reported}})</small><br>{{issues.reported_issue}}
-                    </a>
+        {% if issues_list %}
+            {% for issues in issues_list %}
+                <div class="d-flex mt-3 justify-content-center">
+                    <div class="list-group">
+                        <a href="{% url 'show_hardware_resolution' issues.id %}" style="background-color: lightgrey ; color: red; font-weight: bold;" onmouseover="this.style.background='lightblue';" onmouseout="this.style.background='lightgray';"  class="list-group-item list-group-item-action">
+                            <small>(Reported: {{issues.date_reported}})</small><br>{{issues.reported_issue}}
+                        </a>
+                        {% if issues.issue_pic %}
+                            <img src="{{issues.issue_pic.url}}"></img>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    {% else %}
+            {% endfor %}
+        {% else %}
             <h1 style="text-align: center;">No reported issues.</h1>"
-    {% endif %}
+        {% endif %}
+     </div>
 {% endblock %}    
 

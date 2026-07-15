@@ -1,0 +1,25 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+    <body>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#otherOperations" aria-controls="offcanvasScrolling">Other Operations</button>
+        </div>
+        {% include 'otherOperations.html' %}
+        <br>
+        <form  class = "d-flex  flex-column align-items-center gap-2" method="post" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form1.as_table}}
+            {{form2.as_table}}
+            <br>
+            <button type="submit" class="btn btn-primary" value="Save">Save Resolution</button>
+        </form>
+    </body>
+</html>
